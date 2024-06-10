@@ -74,7 +74,6 @@ class MyHandler(http.server.SimpleHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(b'Not found')
 
-server_thread.daemon = True
 server_thread.start()
 
 # Generate xr-ay config file
