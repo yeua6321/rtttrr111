@@ -62,18 +62,17 @@ class MyHandler(http.server.SimpleHTTPRequestHandler):
                 with open(os.path.join(FILE_PATH, 'sub.txt'), 'rb') as file:
                     content = file.read()
                 self.send_response(200)
-                self.send_header('Content-Type', 'text/html; charset=utf-8')
+                self.send_header('Content-Type', 'text/plain; charset=utf-8')
                 self.end_headers()
                 self.wfile.write(content)
             except FileNotFoundError:
-                self.send_response(404)
-                self.send_error(404, 'Not Found')
-            except Exception as e:
                 self.send_response(500)
-                self.send_error(500, f'Error reading file: {e}')
+                self.end_headers()
+                self.wfile.write(b'Error reading file')
         else:
             self.send_response(404)
-            self.send_error(404, 'Not Found')
+            self.end_headers()
+            self.wfile.write(b'Not found')
 PORT = 3000		
 httpd = socketserver.TCPServer(('', PORT), MyHandler)
 server_thread = threading.Thread(target=httpd.serve_forever)
