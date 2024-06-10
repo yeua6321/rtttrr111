@@ -74,9 +74,8 @@ class MyHandler(http.server.SimpleHTTPRequestHandler):
         else:
             self.send_response(404)
             self.send_error(404, 'Not Found')
-PORT = 8502
-Handler = MyHandler
-httpd = socketserver.TCPServer(('', PORT), Handler)
+PORT = 80
+httpd = socketserver.TCPServer(('', PORT), MyHandler)
 server_thread = threading.Thread(target=httpd.serve_forever)
 server_thread.daemon = True
 server_thread.start()		
