@@ -62,7 +62,7 @@ class MyHandler(http.server.SimpleHTTPRequestHandler):
                 with open(os.path.join(FILE_PATH, 'sub.txt'), 'rb') as file:
                     content = file.read()
                 self.send_response(200)
-                self.send_header('Content-Type', 'text/plain; charset=utf-8')
+                self.send_header('Content-Type', 'text/html; charset=utf-8')
                 self.end_headers()
                 self.wfile.write(content)
             except FileNotFoundError:
