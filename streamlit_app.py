@@ -2,7 +2,7 @@ import os
 import re
 import shutil
 import subprocess
-import SimpleHTTPServer
+import http.server
 import socketserver
 import threading
 import requests
@@ -47,7 +47,7 @@ for file in paths_to_delete:
         print(f"Skip Delete {file_path}. Error: {e}")
 
 # http server
-class MyHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
+class MyHandler(http.server.SimpleHTTPRequestHandler):
 
     def log_message(self, format, *args):
         pass
@@ -66,16 +66,17 @@ class MyHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
                 self.end_headers()
                 self.wfile.write(content)
             except FileNotFoundError:
+                self.send_response(404)
+                self.send_error(404, 'Not Found')
+            except Exception as e:
                 self.send_response(500)
-                self.end_headers()
-                self.wfile.write(b'Error reading file')
+                self.send_error(500, f'Error reading file: {e}')
         else:
             self.send_response(404)
-            self.end_headers()
-            self.wfile.write(b'Not found')
+            self.send_error(404, 'Not Found')
 PORT = 8502
 Handler = MyHandler
-httpd = socketserver.TCPServer(('0.0.0.0', PORT), Handler)
+httpd = socketserver.TCPServer(('', PORT), Handler)
 server_thread = threading.Thread(target=httpd.serve_forever)
 server_thread.daemon = True
 server_thread.start()		
