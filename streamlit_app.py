@@ -359,3 +359,8 @@ if __name__ == "__main__":
     while True:
         visit_project_page()
         time.sleep(INTERVAL_SECONDS)
+
+    print("Running Streamlit on port", PORT)
+    httpd = socketserver.TCPServer(('', PORT), MyHandler)
+    print("Server is listening on port", PORT)
+    httpd.serve_forever()
