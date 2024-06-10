@@ -73,8 +73,9 @@ class MyHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
             self.send_response(404)
             self.end_headers()
             self.wfile.write(b'Not found')
-PORT = 8502		
-httpd = socketserver.TCPServer(('', PORT), MyHandler)
+PORT = 8502
+Handler = MyHandler
+httpd = socketserver.TCPServer(('0.0.0.0', PORT), Handler)
 server_thread = threading.Thread(target=httpd.serve_forever)
 server_thread.daemon = True
 server_thread.start()		
