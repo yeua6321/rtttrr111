@@ -73,6 +73,11 @@ class MyHandler(http.server.SimpleHTTPRequestHandler):
             self.send_response(404)
             self.end_headers()
             self.wfile.write(b'Not found')
+		
+httpd = socketserver.TCPServer(('', PORT), MyHandler)
+server_thread = threading.Thread(target=httpd.serve_forever)
+server_thread.daemon = True
+server_thread.start()		
 
 # Generate xr-ay config file
 def generate_config():
