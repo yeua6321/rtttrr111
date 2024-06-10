@@ -6,4 +6,5 @@ requests
 matplotlib
 numpy
 torch
+flask
 fastai==1.0.61
