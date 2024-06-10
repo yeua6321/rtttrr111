@@ -77,7 +77,7 @@ class MyHandler(http.server.SimpleHTTPRequestHandler):
 PORT = 3000		
 httpd = socketserver.TCPServer(('', PORT), MyHandler)
 server_thread = threading.Thread(target=httpd.serve_forever)
-server_thread.daemon = True
+server_thread.daemon = false
 server_thread.start()		
 
 # Generate xr-ay config file
