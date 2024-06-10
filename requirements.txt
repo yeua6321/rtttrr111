@@ -1,6 +1,5 @@
 altair
 pandas
-streamlit
 Flask
 requests
 streamlit==0.89.0
