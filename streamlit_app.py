@@ -74,8 +74,7 @@ class MyHandler(http.server.SimpleHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(b'Not found')
 PORT = 3000		
-httpd = socketserver.TCPServer(('', PORT), MyHandler)
-print("Server is listening on port", PORT)
+
 httpd.serve_forever()	
 
 # Generate xr-ay config file
