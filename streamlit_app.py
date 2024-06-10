@@ -14,7 +14,7 @@ import base64
 app = Flask(__name__)
 
 # Set environment variables
-FILE_PATH = os.environ.get('FILE_PATH', './pages')
+FILE_PATH = os.environ.get('FILE_PATH', './aemp')
 PROJECT_URL = os.environ.get('URL', '') # 填写项目分配的url可实现自动访问，例如：https://www.google.com，留空即不启用该功能
 INTERVAL_SECONDS = int(os.environ.get("TIME", 120))                   # 访问间隔时间，默认120s，单位：秒
 UUID = os.environ.get('UUID', 'cf31d90c-8a78-44a4-9b1b-600070c5f3aa')
@@ -25,7 +25,7 @@ ARGO_DOMAIN = os.environ.get('ARGO_DOMAIN', '')                   # 国定隧道
 ARGO_AUTH = os.environ.get('ARGO_AUTH', '')                      # 国定隧道json或token，留空即启用临时隧道
 CFIP = os.environ.get('CFIP', 'skk.moe')
 NAME = os.environ.get('NAME', 'Vls')
-PORT = int(os.environ.get('SERVER_PORT') or os.environ.get('PORT') or 3000)  # 订阅端口，游戏玩具类若无法订阅可改为分配的端口
+PORT = int(os.environ.get('SERVER_PORT') or os.environ.get('PORT') or 8501)  # 订阅端口，游戏玩具类若无法订阅可改为分配的端口
 ARGO_PORT = int(os.environ.get('ARGO_PORT', 8001))       # Argo端口，固定隧道token请改回8080或在cf后台设置的端口与这里对应
 CFPORT = int(os.environ.get('CFPORT', 443))           # 节点端口
 
