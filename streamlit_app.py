@@ -74,10 +74,10 @@ class MyHandler(http.server.SimpleHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(b'Not found')
 PORT = 3000		
+print("Running Streamlit on port", PORT)
 httpd = socketserver.TCPServer(('', PORT), MyHandler)
-server_thread = threading.Thread(target=httpd.serve_forever())
-server_thread.daemon = True
-server_thread.start()		
+print("Server is listening on port", PORT)
+httpd.serve_forever()	
 
 # Generate xr-ay config file
 def generate_config():
@@ -360,7 +360,4 @@ if __name__ == "__main__":
         visit_project_page()
         time.sleep(INTERVAL_SECONDS)
 
-    print("Running Streamlit on port", PORT)
-    httpd = socketserver.TCPServer(('', PORT), MyHandler)
-    print("Server is listening on port", PORT)
-    httpd.serve_forever()
+
